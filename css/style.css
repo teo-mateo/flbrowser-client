@@ -5,6 +5,14 @@
     padding: 10px;
   }
 
-  .marg5px{
+.marg5px{
       margin: 5px;
   }
+.marg10px{
+    margin: 10px;
+}
+.rightFloater{
+    display: block !important;
+    margin-right: 0 !important;
+    margin-left: auto !important;
+}
