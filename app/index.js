@@ -8,5 +8,5 @@ var App = require('./components/App')
 
 ReactDOM.render(
     <App />,
-    document.getElementById('app')
+    document.getElementById('app')  
 );
