@@ -6,6 +6,8 @@ require('bootstrap/dist/css/bootstrap.css');
 require('./index.css');
 var App = require('./components/App')
 
+
+
 ReactDOM.render(
     <App />,
     document.getElementById('app')  
