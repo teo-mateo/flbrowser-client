@@ -1,9 +1,13 @@
-.centered {
+.centered2 {
     margin: auto;
     width: 50%;
     border: 1px solid green;
     padding: 10px;
   }
+
+.greenBorder1px{
+    border: 1px solid green;
+}
 
 .marg5px{
       margin: 5px;

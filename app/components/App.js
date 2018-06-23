@@ -91,7 +91,6 @@ class App extends React.Component{
         return(
             <div>
                 <FlbrowserNav isLoggedIn={this.state.loggedIn} onLogout={this.handleLogout}/>
-                <p>FLBrowser client 2</p>
                 {content}
             </div>
         )

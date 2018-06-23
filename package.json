@@ -28,7 +28,9 @@
     "react-router-dom": "^4.1.2",
     "react-tap-event-plugin": "^2.0.1",
     "reactstrap": "6.1.0",
-    "universal-cookie": "2.2.0"
+    "universal-cookie": "2.2.0",
+    "semantic-ui-less": "^2.2.12",
+    "semantic-ui-react": "^0.78.2"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
@@ -42,6 +44,13 @@
     "uglify-js": "^3.0.26",
     "uglifyjs-webpack-plugin": "^0.4.6",
     "webpack": "^3.4.1",
-    "webpack-dev-server": "^2.6.1"
+    "webpack-dev-server": "^2.6.1",
+    "file-loader": "^1.1.9",
+    "fs-extra": "^5.0.0",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
+    "postcss-flexbugs-fixes": "^3.3.0",
+    "postcss-loader": "^2.1.0",
+    "url-loader": "^0.6.2"
   }
 }

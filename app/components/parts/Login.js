@@ -1,7 +1,10 @@
 import React from 'react'
-import { InputGroup, InputGroupAddon, InputGroupText, Input, Button, Container, Row, Col } from 'reactstrap';
 import WebAPI from '../../util/WebAPI'
 import CookieUtil from '../../util/CookieUtil'
+import { 
+        Button as SemButton, 
+        Input as SemInput,
+        Grid, Container } from 'semantic-ui-react'
 
 class Login extends React.Component{
     constructor(props){
@@ -73,35 +76,101 @@ class Login extends React.Component{
             "border": "2px blue dashed"
         }
 
-        return (<div className="centered">
+        return (
+        
+        <div>
+        
+        <Container>
+        <Grid rows={5}>
+            <Grid.Row columns={3}>
+                <Grid.Column>&nbsp;</Grid.Column>
+                <Grid.Column><h3>Log in to my wonderful FILELIST browser</h3></Grid.Column>
+                <Grid.Column>&nbsp;</Grid.Column>
+            </Grid.Row>
+            <Grid.Row columns={3}>
+                <Grid.Column>
+                    &nbsp;
+                </Grid.Column>
+                <Grid.Column>
+                    <h4>Use your Username and Password:</h4>
+                </Grid.Column>
+                <Grid.Column>
+                    &nbsp;
+                </Grid.Column>
+            </Grid.Row>
+            <Grid.Row columns={3}>
+                <Grid.Column>&nbsp;</Grid.Column>
+                <Grid.Column>
+                    <SemInput label="?" placeholder="username" fluid
+                                value={this.state.username}
+                                onChange={this.handleUsernameChange}
+                                onKeyPress={this.handleKeyPress} />                    
+                </Grid.Column>
+                <Grid.Column>&nbsp;</Grid.Column>
+            </Grid.Row>
+            <Grid.Row columns={3}>
+                <Grid.Column>&nbsp;</Grid.Column>
+                <Grid.Column>
+                    <SemInput label="?" placeholder="password" type="password" fluid
+                                    value={this.state.password} 
+                                    onChange={this.handlePasswordChange} 
+                                    onKeyPress={this.handleKeyPress}/>
+                </Grid.Column>
+                <Grid.Column>&nbsp;</Grid.Column>
+            </Grid.Row>
+            <Grid.Row columns={3} >
+                <Grid.Column>&nbsp;</Grid.Column>
+                <Grid.Column>
+                    <SemButton.Group>
+                        <SemButton onClick={this.handleSubmitClick}  className="float-right margin5px" primary>Login</SemButton>                    
+                        <SemButton.Or />
+                        <SemButton onClick={this.handleForgetMeClick}  className="float-right margin5px">Forget me</SemButton> 
+                    </SemButton.Group>
+                    {/*
+                    <Grid>
+                        <Grid.Row columns={2}>
+                            <Grid.Column>
+                                <SemButton onClick={this.handleSubmitClick}  className="float-right margin5px">Login</SemButton>                    
+                            </Grid.Column>                        
+                            <Grid.Column>
+                                <SemButton onClick={this.handleForgetMeClick}  className="float-right margin5px">Forget me</SemButton> 
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>*/}
+                </Grid.Column> 
+                <Grid.Column>&nbsp;</Grid.Column>
+            </Grid.Row>
+            
+        </Grid>
+        </Container>
+
+        {/* 
+        <div className="centered2">
             <Container>
                 <Row>
-                    <InputGroup className="marg5px">
-                        <InputGroupAddon addonType="prepend">Login</InputGroupAddon>
-                        <Input placeholder="username" 
-                            value={this.state.username} 
-                            onChange={this.handleUsernameChange} 
-                            onKeyPress={this.handleKeyPress} />
-                    </InputGroup>
+                    <Col>
+                        <span>Log in to my wonderful Filelist browser</span>
+                    </Col>
                 </Row>
                 <Row>
-                    <InputGroup className="marg5px">
-                    <InputGroupAddon addonType="prepend">Login</InputGroupAddon>
-                        <Input placeholder="password" type="password" 
-                            value={this.state.password} 
-                            onChange={this.handlePasswordChange} 
-                            onKeyPress={this.handleKeyPress}/>
-                    </InputGroup>
+
+                </Row>
+                <Row>
+
                 </Row>
                 <Row>
                     <Col>
-                        <Button onClick={this.handleForgetMeClick} outline color="secondary" className="float-right margin5px">Forget me</Button> {' '}
-                        <Button onClick={this.handleSubmitClick} color="primary" className="float-right margin5px">Login</Button>
+                        
+                        <SemButton onClick={this.handleSubmitClick}  className="float-right margin5px">Login</SemButton>
                     </Col>
                 </Row>
             </Container>
             <br />
-        </div>)
+        </div>
+        */}
+        
+        </div>
+        )
     }
 }
 
