@@ -7,6 +7,7 @@ import BrowseRTR from './parts/BrowseRTR'
 import CookieUtil from '../util/CookieUtil'
 import BrowseFL from "./parts/BrowseFL"
 import Login from "./parts/Login"
+import { Checkbox } from 'semantic-ui-react'
 
 let browserHistory = BrowserRouter.history;
 
@@ -91,7 +92,9 @@ class App extends React.Component{
         return(
             <div>
                 <FlbrowserNav isLoggedIn={this.state.loggedIn} onLogout={this.handleLogout}/>
-				<p>FLBrowser client 2</p>
+				
+                <Checkbox />
+                <p>FLBrowser client 2</p>
                 {content}
             </div>
         )

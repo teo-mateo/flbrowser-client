@@ -134,7 +134,11 @@ class BrowseFL extends React.Component{
                                         WebAPI.downloadTorrent(id);
                                         alert("Torrent " + id + " was sent for download.");
                                     }}> {v.id} </a> </td>
-                                <td> <a href={"https://filelist.ro/details.php?id=" + v.id} target="_blank">{v.name}</a></td>
+                                <td> 
+                                    <a href={"https://filelist.ro/details.php?id=" + v.id} target="_blank">{v.name}</a>
+                                    <br />
+                                    {v.dateadded}
+                                </td>
                                 <td> {v.size}</td>
                                 <td> {v.timesdownloaded}</td>
                                 <td> L/S {v.leechers} / {v.seeders}</td>

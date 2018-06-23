@@ -14,26 +14,28 @@ class CategoryList extends React.Component{
             searchTerm: ""
         };
 
-        WebAPI.getCategories()
-        .then((result) =>{
-            console.log(result);
-            this.setState({
-                categories: result.data
-            });
-        })
-        .catch((error)=>{
-            console.log(error)
-        });
-
-        this.onSearchClick = this.onSearchClick.bind(this);
-        this.onSearchFieldChange = this.onSearchFieldChange.bind(this);
+        this.handleSearchClick = this.handleSearchClick.bind(this);
+        this.handleSearchFieldChange = this.handleSearchFieldChange.bind(this);
     }
 
-    onSearchFieldChange(event){
+    componentDidMount(){
+        WebAPI.getCategories()
+            .then((result) =>{
+                console.log(result);
+                this.setState({
+                    categories: result.data
+                });
+            })
+            .catch((error)=>{
+                console.log(error)
+            });        
+    }
+
+    handleSearchFieldChange(event){
         this.setState({searchTerm: event.target.value});
     }
 
-    onSearchClick(event){
+    handleSearchClick(event){
         if (this.state.searchTerm.length < 3){
             return;
         } else {
@@ -61,9 +63,9 @@ class CategoryList extends React.Component{
                     </Col>                    
                     <Col>
                         <InputGroup>
-                            <Input value={this.props.searchTerm} onChange={this.onSearchFieldChange}/>
+                            <Input value={this.state.searchTerm} onChange={this.handleSearchFieldChange}/>
                             <InputGroupAddon addonType="append">
-                                <Button onClick={this.onSearchClick}>Search</Button>
+                                <Button onClick={this.handleSearchClick}>Search</Button>
                             </InputGroupAddon>
                         </InputGroup>                    
                     </Col>
