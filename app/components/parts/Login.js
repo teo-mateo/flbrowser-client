@@ -84,7 +84,7 @@ class Login extends React.Component{
         <Grid rows={5}>
             <Grid.Row columns={3}>
                 <Grid.Column>&nbsp;</Grid.Column>
-                <Grid.Column><h3>Log in to my wonderful FILELIST browser</h3></Grid.Column>
+                <Grid.Column><h3>Log in to my wonderful FILELIST browser(2)</h3></Grid.Column>
                 <Grid.Column>&nbsp;</Grid.Column>
             </Grid.Row>
             <Grid.Row columns={3}>
