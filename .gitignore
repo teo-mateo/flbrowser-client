@@ -70,3 +70,5 @@ node_modules/
 
 bin/*.torrent
 node_modules/
+
+dist/
