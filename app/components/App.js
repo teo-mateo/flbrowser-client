@@ -22,7 +22,7 @@ class App extends React.Component{
 
         this.state = {
             loggedIn: false,
-            category: 1, 
+            category: 0, 
             page: 0
         };
     }
@@ -72,7 +72,7 @@ class App extends React.Component{
 
     renderHome(params_){
 
-        let category=1;
+        let category=0;
         let page=0;
         if (params_.match.params.category && params_.match.params.page){
             category = params_.match.params.category;

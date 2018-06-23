@@ -10,7 +10,9 @@ class BrowseRTR extends React.Component{
     }
 
     render(){
+        return (
         <div>RTorrentList component</div>
+        );
     }
 
     componentDidMount(){

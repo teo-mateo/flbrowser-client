@@ -20,21 +20,18 @@ class FlbrowserNav extends React.Component{
                         <NavItem>
                             <NavLink href="/home">Home</NavLink>
                         </NavItem>
-                    </Nav>
-                    <Nav>
-                        <NavItem>
-                            <NavLink href="/browse">Browse FL</NavLink>
-                        </NavItem>
-                    </Nav>
-                    <Nav>
                         <NavItem>
                             <NavLink href="/active">Active</NavLink>
                         </NavItem>
-                    </Nav>
-                    <Nav>
                         <NavItem>
                             <NavLink href="#" onClick={this.handleLogoutClick}>Log out</NavLink>
                         </NavItem>
+                    </Nav>
+                    <Nav className="ml-auto" navbar>
+
+                    </Nav>
+                    <Nav className="ml-2" navbar>
+
                     </Nav>
                 </Navbar>
             );

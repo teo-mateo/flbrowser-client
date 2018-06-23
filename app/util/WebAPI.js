@@ -36,10 +36,18 @@ module.exports = {
         return Axios.get(api("/torrents/rtr"), this.getSecureOptionsObject() );
     },
     getFlTorrents: function(category, page){
+        console.log("--getFLTorrents, category:"+category+", page:"+page);
         return Axios.get(api("/torrents/fl/"+category+"/"+page), this.getSecureOptionsObject() );
     },
     downloadTorrent: function(id){
         return Axios.post(api("/torrents/fl/"+id+"/download"), {}, this.getSecureOptionsObject() );
+    }, 
+    searchFlTorrents: function(searchTerm, category, page){
+        console.log("--searchFlTorrents, searchTerm: " + searchTerm + ", category: " + category + ", page: " + page);
+        return Axios.get(
+            api("/torrents/fl/search/"+searchTerm+"/"+category+"/"+page), 
+            this.getSecureOptionsObject() 
+        );
     }
 
 

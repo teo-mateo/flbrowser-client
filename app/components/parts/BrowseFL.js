@@ -8,6 +8,9 @@ class BrowseFL extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            searchTerm: "",
+            category: 0,
+            page: 0,
             torrents: [], 
             rtorrents: []
         }
@@ -15,15 +18,25 @@ class BrowseFL extends React.Component{
         this.loadTorrents = this.loadTorrents.bind(this);
         this.loadFLTorrents = this.loadFLTorrents.bind(this);
         this.loadRTRTorrents = this.loadRTRTorrents.bind(this);
+        this.onCategoryChange =  this.onCategoryChange.bind(this);
+        this.onSearch = this.onSearch.bind(this);
     }
 
+    onSearch(searchTerm){
+        this.setState({
+            searchTerm: searchTerm, 
+            page: 0}, this.loadTorrents);
+    }
 
+    onCategoryChange(category){
+        this.setState({
+            searchTerm: "", 
+            category: category,
+            page: 0,
+        }, this.loadTorrents)
+    }
 
     componentDidMount(){
-        this.loadTorrents();
-    }
-
-    componentWillReceiveProps(){
         this.loadTorrents();
     }
 
@@ -32,18 +45,48 @@ class BrowseFL extends React.Component{
         this.loadRTRTorrents();
     }
 
+    compo
+
     loadFLTorrents(){
-        WebAPI.getFlTorrents(this.props.category, this.props.page)
+
+        let searchTerm = this.state.searchTerm;
+        let category = this.state.category;
+        let page = this.state.page;
+
+        if (searchTerm === ""){
+            WebAPI.getFlTorrents(category, page)
             .then((response) => {
                 console.log('--getFlTorrents.then--');
                 console.log(response);
-                this.setState({torrents:response.data});
+                this.setState({
+                    torrents:response.data, 
+                    category: category,
+                    page: page,
+                });
                 //console.log(this.state);
             })
             .catch ((error) => {
                 console.log('--getFlTorrents.error--');
                 console.log(error);
             });
+        } else {
+            WebAPI.searchFlTorrents(searchTerm, category, page)
+            .then((response) => {
+                console.log('--searchFlTorrents.then--');
+                console.log(response);
+                this.setState({
+                    torrents:response.data, 
+                    category: category,
+                    page: page,
+                });
+                //console.log(this.state);
+            })
+            .catch ((error) => {
+                console.log('--searchFlTorrents.error--');
+                console.log(error);
+            });
+        }
+
     }
 
     loadRTRTorrents(){
@@ -63,11 +106,15 @@ class BrowseFL extends React.Component{
 
         return(
             <div className="marg5px">
-                <CategoryList onNavigateTo={this.props.onNavigateTo}/>
+                <CategoryList 
+                    onCategoryChange={this.onCategoryChange} 
+                    onSearch={this.onSearch}
+                    searchTerm={this.state.searchTerm}/>
                 <Table responsive dark>
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Size</th>
                             <th>Downloaded</th>
@@ -75,16 +122,19 @@ class BrowseFL extends React.Component{
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.torrents.map((v,i) =>
+                        {this.state.torrents.map((v,i) => 
                              (<tr key={i}>
-                                <th scope="row"> 
+                                <th scope="row">
+                                    {i+1}
+                                </th>
+                                <td> 
                                     <a href="#" onClick={(e) => {
                                         e.preventDefault();
                                         var id = e.target.innerText;
                                         WebAPI.downloadTorrent(id);
                                         alert("Torrent " + id + " was sent for download.");
-                                    }}> {v.id} </a> </th>
-                                <td> {v.name} </td>
+                                    }}> {v.id} </a> </td>
+                                <td> <a href={"https://filelist.ro/details.php?id=" + v.id} target="_blank">{v.name}</a></td>
                                 <td> {v.size}</td>
                                 <td> {v.timesdownloaded}</td>
                                 <td> L/S {v.leechers} / {v.seeders}</td>
