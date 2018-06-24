@@ -2,8 +2,9 @@ import React from 'react'
 //import { withRouter } from 'react-router-dom'
 import CategoryLink from './CategoryLink'
 import WebAPI from '../../util/WebAPI'
-import { Button, ButtonGroup, Input, InputGroup, InputGroupAddon, Container, Row, Col } from 'reactstrap';
 import { withRouter } from 'react-router';
+import { Container, Dropdown, Grid, Input } from 'semantic-ui-react'
+
 
 class CategoryList extends React.Component{
 
@@ -32,7 +33,9 @@ class CategoryList extends React.Component{
     }
 
     handleSearchFieldChange(event){
-        this.setState({searchTerm: event.target.value});
+        this.setState({searchTerm: event.target.value}, () =>{
+            //this.props.onSearch(this.state.searchTerm);
+        });
     }
 
     handleSearchClick(event){
@@ -44,34 +47,35 @@ class CategoryList extends React.Component{
     }
 
     render(){
-        return (
-            <Container >
-                <Row className="margin5px">
-                    <Col>
-                        <ButtonGroup>
-                        {this.state.categories.map((v,i)=>(
-                                <Button key={v.id} 
-                                    onClick={(event) =>{
-                                        this.props.onCategoryChange(v.id);
-                                        //this.props.history.push( '/browse/'+v.id + '/0')
-                                }}>{v.name}</Button>
-                            ))}
-                    </ButtonGroup>
-                    </Col>
-                    <Col>
-                        <p>Pagination...</p>
-                    </Col>                    
-                    <Col>
-                        <InputGroup>
-                            <Input value={this.state.searchTerm} onChange={this.handleSearchFieldChange}/>
-                            <InputGroupAddon addonType="append">
-                                <Button onClick={this.handleSearchClick}>Search</Button>
-                            </InputGroupAddon>
-                        </InputGroup>                    
-                    </Col>
 
-                </Row>
-            </Container>
+        let categoriesOptions = this.state.categories.map((v,i) => ({text: v.name, value: v.id}));
+
+        return (
+                <Container>
+                    <Grid>
+                        <Grid.Row columns={3}>
+                            <Grid.Column width={3}>
+                                <Dropdown options={categoriesOptions} 
+                                    placeholder="Select category"
+                                    onChange={(event, data)=>{
+                                        this.props.onCategoryChange(data.value);
+                                    }}/>
+                            </Grid.Column>
+                            <Grid.Column width={8}></Grid.Column>
+                            <Grid.Column width={5}>
+                                <Input 
+                                    size="small"
+                                    action='Search' 
+                                    placeholder='Search...'
+                                    value={this.state.searchTerm} 
+                                    onChange={this.handleSearchFieldChange} 
+                                    onKeyPress={() => {
+                                        console.log("on key press!");
+                                    }} />
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                </Container>
         )
     }
 }

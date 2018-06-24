@@ -26,7 +26,11 @@ module.exports = {
         return Axios.get(api("/ping"), this.getSecureOptionsObject() );
     },
     login: function(obj){
-        return Axios.post(api("/login2"), obj);
+        return Axios.post(api("/login"), obj);
+    },
+    logout(){
+        let accessToken = CookieUtil.GetAccessTokenFromCookie();
+        return Axios.post(api('/logout/'+accessToken))
     },
     getCategories : function(){
         
@@ -49,6 +53,4 @@ module.exports = {
             this.getSecureOptionsObject() 
         );
     }
-
-
 }

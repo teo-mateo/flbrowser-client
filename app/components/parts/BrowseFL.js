@@ -45,8 +45,6 @@ class BrowseFL extends React.Component{
         this.loadRTRTorrents();
     }
 
-    compo
-
     loadFLTorrents(){
 
         let searchTerm = this.state.searchTerm;
@@ -106,6 +104,7 @@ class BrowseFL extends React.Component{
 
         return(
             <div className="marg5px">
+            <h3>FILELIST Torrents</h3>
                 <CategoryList 
                     onCategoryChange={this.onCategoryChange} 
                     onSearch={this.onSearch}

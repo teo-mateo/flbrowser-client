@@ -21,10 +21,16 @@ module.exports = {
         ucookie.remove(accessTokenCookieName);
     }, 
     GetUsernamePasswordFromCookie: function(){
-        return {
-            username: ucookie.get(usernameCookieName),
-            password: ucookie.get(passwordCookieName)
-        };
+        let username = ucookie.get(usernameCookieName);
+        if (username === undefined){
+            username = ""
+        }
+        let password = ucookie.get(passwordCookieName);
+        if (password === undefined){
+            password = ""
+        }
+
+        return { username, password };
     },
     SetUsernamePasswordCookie: function(username, password){
         ucookie.set(usernameCookieName, username, {

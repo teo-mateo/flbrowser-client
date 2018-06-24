@@ -2,7 +2,7 @@ import React from 'react'
 import WebAPI from '../../util/WebAPI'
 import CookieUtil from '../../util/CookieUtil'
 import { 
-        Button as SemButton, 
+        Button as SemButton, Divider,
         Input as SemInput,
         Grid, Container } from 'semantic-ui-react'
 
@@ -43,7 +43,8 @@ class Login extends React.Component{
     }
 
     componentDidMount(){
-        this.setState(CookieUtil.GetUsernamePasswordFromCookie());
+        let cookieUsernamePassword = CookieUtil.GetUsernamePasswordFromCookie();
+        this.setState(cookieUsernamePassword);
     }
 
     handleSubmitClick(event){
@@ -77,50 +78,46 @@ class Login extends React.Component{
         }
 
         return (
-        
-        <div>
-        
-        <Container>
+
         <Grid rows={5}>
             <Grid.Row columns={3}>
-                <Grid.Column>&nbsp;</Grid.Column>
-                <Grid.Column><h3>Log in to my wonderful FILELIST browser(2)</h3></Grid.Column>
-                <Grid.Column>&nbsp;</Grid.Column>
+                <Grid.Column width={3}/>
+                <Grid.Column width={10}><h3>Log in to FILELIST browser</h3></Grid.Column>
+                <Grid.Column width={3}/>
+            </Grid.Row>
+            <Grid.Row columns={1}>
+                <Grid.Column width={16}><hr /></Grid.Column>
             </Grid.Row>
             <Grid.Row columns={3}>
-                <Grid.Column>
-                    &nbsp;
-                </Grid.Column>
-                <Grid.Column>
+                <Grid.Column width={3}/>
+                <Grid.Column width={10}>
                     <h4>Use your Username and Password:</h4>
                 </Grid.Column>
-                <Grid.Column>
-                    &nbsp;
-                </Grid.Column>
+                <Grid.Column width={3}/>
             </Grid.Row>
             <Grid.Row columns={3}>
-                <Grid.Column>&nbsp;</Grid.Column>
-                <Grid.Column>
+                <Grid.Column width={3}/>
+                <Grid.Column width={10}>
                     <SemInput label="?" placeholder="username" fluid
                                 value={this.state.username}
                                 onChange={this.handleUsernameChange}
                                 onKeyPress={this.handleKeyPress} />                    
                 </Grid.Column>
-                <Grid.Column>&nbsp;</Grid.Column>
+                <Grid.Column width={3}/>
             </Grid.Row>
             <Grid.Row columns={3}>
-                <Grid.Column>&nbsp;</Grid.Column>
-                <Grid.Column>
+                <Grid.Column width={3}/>
+                <Grid.Column width={10}>
                     <SemInput label="?" placeholder="password" type="password" fluid
                                     value={this.state.password} 
                                     onChange={this.handlePasswordChange} 
                                     onKeyPress={this.handleKeyPress}/>
                 </Grid.Column>
-                <Grid.Column>&nbsp;</Grid.Column>
+                <Grid.Column width={3}/>
             </Grid.Row>
             <Grid.Row columns={3} >
-                <Grid.Column>&nbsp;</Grid.Column>
-                <Grid.Column>
+                <Grid.Column width={3}/>
+                <Grid.Column width={10}>
                     <SemButton.Group>
                         <SemButton onClick={this.handleSubmitClick}  className="float-right margin5px" primary>Login</SemButton>                    
                         <SemButton.Or />
@@ -138,38 +135,10 @@ class Login extends React.Component{
                         </Grid.Row>
                     </Grid>*/}
                 </Grid.Column> 
-                <Grid.Column>&nbsp;</Grid.Column>
+                <Grid.Column width={3}/>
             </Grid.Row>
             
         </Grid>
-        </Container>
-
-        {/* 
-        <div className="centered2">
-            <Container>
-                <Row>
-                    <Col>
-                        <span>Log in to my wonderful Filelist browser</span>
-                    </Col>
-                </Row>
-                <Row>
-
-                </Row>
-                <Row>
-
-                </Row>
-                <Row>
-                    <Col>
-                        
-                        <SemButton onClick={this.handleSubmitClick}  className="float-right margin5px">Login</SemButton>
-                    </Col>
-                </Row>
-            </Container>
-            <br />
-        </div>
-        */}
-        
-        </div>
         )
     }
 }

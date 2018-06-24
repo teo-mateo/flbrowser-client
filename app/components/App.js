@@ -7,6 +7,8 @@ import BrowseRTR from './parts/BrowseRTR'
 import CookieUtil from '../util/CookieUtil'
 import BrowseFL from "./parts/BrowseFL"
 import Login from "./parts/Login"
+import {Container} from 'semantic-ui-react'
+import { withRouter } from 'react-router';
 
 let browserHistory = BrowserRouter.history;
 
@@ -64,10 +66,19 @@ class App extends React.Component{
         });
     }
     handleLogout(){
-        CookieUtil.RemoveAccessTokenCookie();
-        this.setState({
-            loggedIn: false
-        });
+        WebAPI.logout()
+            .then(() => {
+                CookieUtil.RemoveAccessTokenCookie();
+                this.setState({
+                    loggedIn: false
+                }, () => {
+                    let br = BrowserRouter;
+                    this.props.history.push("/")
+                });
+            })
+            .catch((error) =>{
+                console.log(error);
+            });
     }
 
     renderHome(params_){
@@ -79,7 +90,7 @@ class App extends React.Component{
             page = params_.match.params.page;
         }
 
-        let content = ""
+        let content = "";
         if (this.state.loggedIn){
             content = (<BrowseFL 
                 category={category} 
@@ -97,11 +108,18 @@ class App extends React.Component{
     }
 
     renderActive(){
+
+        let content = "";
+        if (this.state.loggedIn){
+            content = (<BrowseRTR />);
+        } else {
+            content = (<Login onLogin={this.handleLogin} />);
+        }
+
         return(
             <div>
-                <FlbrowserNav isLoggedIn={this.state.loggedIn}/>
-                <p>FLBrowser client - RTorrent</p>
-                <BrowseRTR />
+                <FlbrowserNav isLoggedIn={this.state.loggedIn} onLogout={this.handleLogout} />
+                {content}
             </div>
         )
     }
@@ -109,11 +127,10 @@ class App extends React.Component{
     render(){
         let basename = this.getBasename();
         return (
-            <div>   
+            <Container>   
                 <BrowserRouter basename={basename}>
                     <Switch>
                         <Route path='/' exact render={this.renderHome} />
-                        <Route path='/home' render={this.renderHome} />
                         <Route path='/browse/:category/:page' render={(params)=>{
                             return (
                                 <div>
@@ -128,7 +145,7 @@ class App extends React.Component{
                         <Route path='/active' render={this.renderActive} />
                     </Switch>
                 </BrowserRouter>
-            </div>
+            </Container>
         )
     }
 }
