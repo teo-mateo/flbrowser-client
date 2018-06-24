@@ -12,6 +12,8 @@ var api = function(url){
     return ApiRoot + url
 }
 
+
+
 module.exports = {
 
     getSecureOptionsObject: function(){
@@ -52,5 +54,25 @@ module.exports = {
             api("/torrents/fl/search/"+searchTerm+"/"+category+"/"+page), 
             this.getSecureOptionsObject() 
         );
+    }, 
+
+    rtrAction: function(id, action){
+        switch(action){
+            case "open":
+            case "close":
+            case "resume":
+            case "pause":
+            case "start":
+            case "stop":
+            case "erase":
+                console.log("--rtr_Action " + action + " " + id);
+                return Axios.post(api("/torrents/rtr/"+id+"/"+action), {}, this.getSecureOptionsObject() );
+                break;
+            default:
+                throw("--rtr_Action : bad action: " + action );
+
+        }
+        
     }
+
 }
